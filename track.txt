@@ -1,0 +1,128 @@
+TODO ESTO Con AgglomerativeCluster y distancia coseno:
+
+Sin modificar nada:
+Con TF: -0.0507482108003
+Con IDF: 0.0632368703108
+Con TF_ID: -0.182126696833
+
+Quitando stop words:
+Con TF: -0.0961538461538
+Con IDF: 0.0632368703108
+Con TF_IDF: -0.100886162236
+
+Haciendo lemmatización:
+Con TF: 0.0977288368892 <- DE MOMENTO ESTE ES EL MEJOR
+Con IDF: 0.0632368703108
+Con TF_IDF: -0.114525139665
+
+Quitando stop words y haciendo lemmatización:
+Con TF: -0.0101809954751
+Con IDF: 0.0632368703108
+Con TF_IDF: -0.0604070912672
+
+Haciendo stemming:
+Con TF: -0.0507482108003
+Con IDF: 0.0632368703108
+Con TF_IDF: 0
+
+Quitando stop words y haciendo stemming:
+Con TF: -0.0961538461538
+Con IDF: 0.0632368703108
+Con TF_IDF: -0.100886162236
+
+
+Pasando todas las palabras a minúsculas:
+Con TF: -0.11625
+Con IDF: 0.0632368703108
+Con TF_ID: 0 
+
+Pasando todas las palabras a minúsculas y quitando stop words:
+Con TF: -0.144305307096
+Con IDF: 0.0632368703108
+Con TF_IDF: -0.0604070912672
+
+Pasando todas las palabras a minúsculas y haciendo lemmatización:
+Con TF: -0.0123915737299
+Con IDF: 0.0632368703108
+Con TF_IDF: -0.00542740841248
+
+Pasando todas las palabras a minúsculas, quitando stop words y haciendo lemmatización:
+Con TF: -0.0303687635575
+Con IDF: 0.0632368703108
+Con TF_IDF: -0.0604070912672
+
+Pasando todas las palabras a minúsculas y haciendo stemming:
+Con TF: -0.0123915737299
+Con IDF: 0.0632368703108
+Con TF_IDF: -0.08
+
+Pasando todas las palabras a minúsculas, quitando stop words y haciendo stemming:
+Con TF: -0.0303687635575
+Con IDF: 0.0632368703108
+Con TF_IDF: -0.100886162236
+
+
+
+
+TODO ESTO Con GAACluster y distancia euclídea:
+
+Sin modificar nada:
+Con TF: 0.0977288368892
+Con IDF: 0
+Con TF_IDF: -0.0725806451613 
+
+Quitando stop words:
+Con TF: -0.0101809954751
+Con IDF: 0
+Con TF_IDF: -0.0961538461538
+
+Haciendo lemmatización:
+Con TF: 0.0977288368892
+Con IDF: 0
+Con TF_IDF: -0.114525139665
+
+Quitando stop words y haciendo lemmatización:
+Con TF: -0.0101809954751
+Con IDF: 0
+Con TF_IDF: -0.0604070912672
+
+Haciendo stemming:
+Con TF: 0.0977288368892
+Con IDF: 0
+Con TF_IDF: -0.0725806451613
+
+Quitando stop words y haciendo stemming:
+Con TF: -0.0101809954751
+Con IDF: 0
+Con TF_IDF: -0.0961538461538
+
+Pasando todas las palabras a minúsculas:
+Con TF: -0.0101809954751
+Con IDF: 0
+Con TF_IDF: 0.0797720797721
+
+Pasando todas las palabras a minúsculas y quitando stop words:
+Con TF: -0.0303687635575
+Con IDF: 0
+Con TF_IDF: -0.0604070912672
+
+Pasando todas las palabras a minúsculas y haciendo lemmatización:
+Con TF: -0.0123915737299
+Con IDF: 0
+Con TF_IDF: -0.00542740841248
+
+Pasando todas las palabras a minúsculas, quitando stop words y haciendo lemmatización:
+Con TF: -0.0303687635575
+Con IDF: 0
+Con TF_IDF: -0.0604070912672
+
+Pasando todas las palabras a minúsculas y haciendo stemming:
+Con TF: -0.0123915737299
+Con IDF: 0
+Con TF_IDF: -0.08 
+
+Pasando todas las palabras a minúsculas, quitando stop words y haciendo stemming:
+Con TF: -0.0303687635575
+Con IDF: 0
+Con TF_IDF: -0.100886162236
+
