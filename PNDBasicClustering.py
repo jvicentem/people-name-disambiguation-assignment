@@ -27,21 +27,21 @@ def cluster_texts(texts, clustersNumber, distance):
     print("Created a collection of", len(collection), "terms.")
 
     #get a list of unique terms
-    #unique_terms = list(set(collection)) #NUEVO. Para lemmatización comentar esta línea y descomentar la de abajo
-    unique_terms = collection # NUEVO. Sólo descomentar para lematiTFión
+    unique_terms = list(set(collection)) #NUEVO. Para lemmatización comentar esta línea y descomentar la de abajo
+    #unique_terms = collection # NUEVO. Sólo descomentar para lematización
 
     print("Unique terms found: ", len(unique_terms))
 
     ### And here we actually call the function and create our array of vectors.
-    vectors = [numpy.array(TF_IDF(f,unique_terms, collection)) for f in texts] # NUEVO
+    vectors = [numpy.array(TF(f,unique_terms, collection)) for f in texts] # NUEVO
     print("Vectors created.")
 
     # initialize the clusterer
-    clusterer = GAAClusterer(clustersNumber)
-    clusters = clusterer.cluster(vectors, True)
-    #clusterer = AgglomerativeClustering(n_clusters=clustersNumber,
-    #                                  linkage="average", affinity=distanceFunction)
-    #clusters = clusterer.fit_predict(vectors)
+    #clusterer = GAAClusterer(clustersNumber)
+    #clusters = clusterer.cluster(vectors, True)
+    clusterer = AgglomerativeClustering(n_clusters=clustersNumber,
+                                      linkage="average", affinity=distanceFunction)
+    clusters = clusterer.fit_predict(vectors)
 
     return clusters
 
@@ -81,17 +81,17 @@ if __name__ == "__main__":
             raw = f.read()
             f.close()
 
-            #tokens = nltk.word_tokenize(raw) 
-            tokens = nltk.word_tokenize(raw.lower()) # NUEVO
+            tokens = nltk.word_tokenize(raw) 
+            # tokens = nltk.word_tokenize(raw.lower()) # NUEVO
 
-            stop = set(stopwords.words('english')) # NUEVO
-            filter_tokens = []
-            for token in tokens:
-                 if token not in string.punctuation and token not in stop:
-                     filter_tokens.append(token) 
-            tokens = filter_tokens # /NUEVO
+            # stop = set(stopwords.words('english')) # NUEVO
+            # filter_tokens = []
+            # for token in tokens:
+            #      if token not in string.punctuation and token not in stop:
+            #          filter_tokens.append(token) 
+            # tokens = filter_tokens # /NUEVO
 
-            # #Seleccionamos el lematizador. # NUEVO
+            # # #Seleccionamos el lematizador. # NUEVO
             # wordnet_lemmatizer = WordNetLemmatizer()
             # lemmatizeds = []
             # nlemmas = []
@@ -112,14 +112,14 @@ if __name__ == "__main__":
             #         nlemmas.append(token) 
             # tokens = nlemmas # /NUEVO
 
-            # Seleccionamos el steamer que deseados utilizar. # NUEVO
-            stemmer = PorterStemmer()
-            stemmeds = []
-            # Para cada token del texto obtenemos su raíz.
-            for token in tokens:
-                stemmed = stemmer.stem(token)
-                stemmeds.append(stemmed)
-            tokens = stemmeds # /NUEVO
+            # # Seleccionamos el steamer que deseados utilizar. # NUEVO
+            # stemmer = PorterStemmer()
+            # stemmeds = []
+            # # Para cada token del texto obtenemos su raíz.
+            # for token in tokens:
+            #     stemmed = stemmer.stem(token)
+            #     stemmeds.append(stemmed)
+            # tokens = stemmeds # /NUEVO
 
             text = nltk.Text(tokens)
             texts.append(text)
