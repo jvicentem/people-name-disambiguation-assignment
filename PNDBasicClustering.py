@@ -9,7 +9,8 @@ from nltk.corpus import stopwords # NUEVO
 from nltk.stem import WordNetLemmatizer # NUEVO
 from nltk.corpus import wordnet # NUEVO
 from nltk.stem.porter import PorterStemmer # NUEVO
-
+from nltk.stem import SnowballStemmer # NUEVO
+from nltk.tokenize import wordpunct_tokenize #NUEVO
 # http://stackoverflow.com/a/28327086
 
 def read_file(file):
@@ -33,14 +34,14 @@ def cluster_texts(texts, clustersNumber, distance):
     print("Unique terms found: ", len(unique_terms))
 
     ### And here we actually call the function and create our array of vectors.
-    vectors = [numpy.array(TF(f,unique_terms, collection)) for f in texts] # NUEVO
+    vectors = [numpy.array(TF_IDF(f,unique_terms, collection)) for f in texts] # NUEVO
     print("Vectors created.")
 
     # initialize the clusterer
     #clusterer = GAAClusterer(clustersNumber)
     #clusters = clusterer.cluster(vectors, True)
     clusterer = AgglomerativeClustering(n_clusters=clustersNumber,
-                                      linkage="average", affinity=distanceFunction)
+                                     linkage="average", affinity=distanceFunction) 
     clusters = clusterer.fit_predict(vectors)
 
     return clusters
@@ -74,6 +75,7 @@ if __name__ == "__main__":
     texts = []
 
     listing = os.listdir(folder)
+    listing.sort()
     for file in listing:
         if file.endswith(".txt"):
             url = folder+"/"+file
@@ -81,15 +83,16 @@ if __name__ == "__main__":
             raw = f.read()
             f.close()
 
-            tokens = nltk.word_tokenize(raw) 
-            # tokens = nltk.word_tokenize(raw.lower()) # NUEVO
+            #tokens = nltk.word_tokenize(raw) 
+            #tokens = nltk.word_tokenize(raw.lower()) # NUEVO
+            tokens = wordpunct_tokenize(raw.lower()) #NUEVO
 
-            # stop = set(stopwords.words('english')) # NUEVO
-            # filter_tokens = []
-            # for token in tokens:
-            #      if token not in string.punctuation and token not in stop:
-            #          filter_tokens.append(token) 
-            # tokens = filter_tokens # /NUEVO
+            stop = set(stopwords.words('english')) # NUEVO
+            filter_tokens = []
+            for token in tokens:
+                 if token not in string.punctuation and token not in stop:
+                     filter_tokens.append(token) 
+            tokens = filter_tokens # /NUEVO
 
             # # #Seleccionamos el lematizador. # NUEVO
             # wordnet_lemmatizer = WordNetLemmatizer()
@@ -113,7 +116,8 @@ if __name__ == "__main__":
             # tokens = nlemmas # /NUEVO
 
             # # Seleccionamos el steamer que deseados utilizar. # NUEVO
-            # stemmer = PorterStemmer()
+            # stemmer = SnowballStemmer('english')
+            # #stemmer = PorterStemmer()
             # stemmeds = []
             # # Para cada token del texto obtenemos su raíz.
             # for token in tokens:
@@ -129,8 +133,11 @@ if __name__ == "__main__":
     print("Prepared ", len(texts), " documents...")
     print("They can be accessed using texts[0] - texts[" + str(len(texts)-1) + "]")
 
-    #distanceFunction ="cosine"
-    distanceFunction = "euclidean"
+    distanceFunction ="cosine" #<-
+    #distanceFunction = "euclidean"
+    #distanceFunction =  "l1"
+    #distanceFunction =  "l2"
+    #distanceFunction =  "manhattan"
     test = cluster_texts(texts,4,distanceFunction)
     print("test: ", test)
     # Gold Standard
