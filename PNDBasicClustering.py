@@ -7,8 +7,6 @@ from nltk.tag.stanford import StanfordNERTagger
 from nltk.internals import find_jars_within_path, config_java
 
 
-#http://stackoverflow.com/a/28327086 -> para solucionar error "list object is not callable", se ha de modificar el archivo nltk/cluster/util.py
-
 # Read all documents contained into Thomas Baker directory
 def read_file(file):
     with open(file, 'r') as myfile:
@@ -19,7 +17,6 @@ def read_file(file):
     return data
 
 
-
 # Function used to separate into words of the diferent documents
 def cluster_texts(texts, clustersNumber, distance):
     
@@ -28,12 +25,11 @@ def cluster_texts(texts, clustersNumber, distance):
     print("Created a collection of", len(collection), "terms.")
 
     # Get a list of unique terms
-    unique_terms = list(set(collection)) #NUEVO. Para lemmatizaci�n comentar esta l�nea y descomentar la de abajo
-    #unique_terms = collection # NUEVO. S�lo descomentar para lematizaci�n
+    unique_terms = list(set(collection))
 
     print("Unique terms found: ", len(unique_terms))
 
-    ### And here we actually call the function and create our array of vectors.
+    # And here we actually call the function and create our array of vectors.
     vectors = [numpy.array(TF_IDF(f,unique_terms, collection)) for f in texts] # NUEVO
     print("Vectors created.")
 
