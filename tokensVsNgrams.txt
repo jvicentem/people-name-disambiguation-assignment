@@ -1,0 +1,25 @@
+Using tokens instead of ngrams with the same distance function (braycurtis)
+we obtain:
+
+Prepared  19  documents...
+They can be accessed using texts[0] - texts[18]
+Created a collection of 17934 terms.
+Unique terms found:  4834
+Vectors created.
+test:  [0 0 0 0 0 0 3 0 0 2 0 0 1 0 0 0 0 0 0]
+reference:  [0, 1, 2, 0, 0, 0, 3, 0, 0, 0, 2, 0, 3, 3, 0, 1, 2, 0, 1]
+rand_score:  0.0836012861736335
+
+
+
+Using ngrams instead of tokens with the same distance function (braycurtis) 
+we obtain:
+
+Prepared  19  documents...
+They can be accessed using texts[0] - texts[18]
+Created a collection of 3673 terms.
+Unique terms found:  2999
+Vectors created.
+test:  [2 0 1 2 2 2 0 2 2 2 1 2 3 0 2 0 1 2 0]
+reference:  [0, 1, 2, 0, 0, 0, 3, 0, 0, 0, 2, 0, 3, 3, 0, 1, 2, 0, 1]
+rand_score:  0.893854748603352 -> BEST RAND SCORE
