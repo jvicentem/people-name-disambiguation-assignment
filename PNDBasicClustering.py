@@ -4,7 +4,6 @@ from sklearn.cluster import AgglomerativeClustering
 from sklearn.metrics.cluster import adjusted_rand_score
 from nltk import ngrams
 from nltk.tag.stanford import StanfordNERTagger
-from nltk.internals import find_jars_within_path, config_java
 
 
 #http://stackoverflow.com/a/28327086 -> para solucionar error "list object is not callable", se ha de modificar el archivo nltk/cluster/util.py
@@ -25,7 +24,7 @@ def cluster_texts(texts, clustersNumber, distance):
     collection = nltk.TextCollection(texts)
     print("Created a collection of", len(collection), "terms.")
 
-    # Gget a list of unique terms
+    # Get a list of unique terms
     unique_terms = list(set(collection)) #NUEVO. Para lemmatizaci�n comentar esta l�nea y descomentar la de abajo
     #unique_terms = collection # NUEVO. S�lo descomentar para lematizaci�n
 
@@ -56,7 +55,7 @@ def IDF(document, unique_terms, collection):
         word_idf.append(collection.idf(word))
     return word_idf
 
-# we use that document in the analysis, it presents the best score in all the test performed
+# We use that document in the analysis, it presents the best score in all the test performed
 def TF_IDF(document, unique_terms, collection):
     word_tfidf = []
     for word in unique_terms:
@@ -82,7 +81,7 @@ if __name__ == "__main__":
     st = StanfordNERTagger(ner_modelfile,ner_jarfile)
 
 
-    # read all files contained into listing, and tokenize the words. suddenly, filter the tokens which contains the condition
+    # Read all files contained into listing, and tokenize the words. suddenly, filter the tokens which contains the condition
     for file in listing:
         if file.endswith(".txt"):
             url = folder+"/"+file
@@ -90,17 +89,8 @@ if __name__ == "__main__":
             raw = f.read()
             f.close()
 
-            tokens = nltk.word_tokenize(raw) 
-            #tokens = nltk.word_tokenize(raw.lower()) # NUEVO no se puede usar con EN NER
-            #tokens = wordpunct_tokenize(raw.lower()) #NUEVO no se puede usar con EN NER
-
-            #stop = set(stopwords.words('english')) # NUEVO
-            # filter_tokens = []
-            # for token in tokens:
-            #      if token not in string.punctuation and token not in stop:
-            #          filter_tokens.append(token) 
-            # tokens = filter_tokens 
-
+            tokens = nltk.word_tokenize(raw)
+ 
             filter_tokens = []
             for token in tokens:
                 if re.search('[a-zA-Z0-9]', token):
