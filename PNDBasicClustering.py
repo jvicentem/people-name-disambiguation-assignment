@@ -4,22 +4,25 @@ from sklearn.cluster import AgglomerativeClustering
 from sklearn.metrics.cluster import adjusted_rand_score
 from nltk import ngrams
 from nltk.tag.stanford import StanfordNERTagger
+from nltk.internals import find_jars_within_path, config_java
 
 
 #http://stackoverflow.com/a/28327086 -> para solucionar error "list object is not callable", se ha de modificar el archivo nltk/cluster/util.py
 
 # Read all documents contained into Thomas Baker directory
 def read_file(file):
-    myfile = open(file,"r")
-    data = ""
-    lines = myfile.readlines()
-    for line in lines:
-        data = data + line
-    myfile.close
+    with open(file, 'r') as myfile:
+        data = ""
+        lines = myfile.readlines()
+        for line in lines:
+            data = data + line
     return data
+
+
 
 # Function used to separate into words of the diferent documents
 def cluster_texts(texts, clustersNumber, distance):
+    
     #Load the list of texts into a TextCollection object.
     collection = nltk.TextCollection(texts)
     print("Created a collection of", len(collection), "terms.")
@@ -90,7 +93,7 @@ if __name__ == "__main__":
             f.close()
 
             tokens = nltk.word_tokenize(raw)
- 
+
             filter_tokens = []
             for token in tokens:
                 if re.search('[a-zA-Z0-9]', token):
@@ -100,12 +103,12 @@ if __name__ == "__main__":
             named_entities = []
             tagged_words = st.tag(tokens)
 
-            # set a tag for all tokens to name the different entities
+            # Set a tag for all tokens to name the different entities
             for tagged_word in tagged_words:
                 if tagged_word[1] != 'O':
                     named_entities.append(tagged_word[0])
 
-            # classify the different named entities into 3 ngrams (groups)
+            # Classify the different named entities into 3 ngrams (groups)
             n = 3
             ngramss = list(set(ngrams(named_entities, n)))
                          
@@ -129,7 +132,7 @@ if __name__ == "__main__":
     #distanceFunction = "hamming"      <- -0.058949624866023516
 
 
-    # this array contains the results of our analysis given a distance function -> identify which thomas baker is named in each documents
+    # This array contains the results of our analysis given a distance function -> identify which thomas baker is named in each documents
     test = cluster_texts(texts,4,distanceFunction)
 
     print("test: ", test)
